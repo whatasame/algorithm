@@ -25,5 +25,7 @@ public class Problem11719 {
         }
 
         System.out.println(sb);
+
+        br.close();
     }
 }
