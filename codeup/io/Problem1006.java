@@ -1,4 +1,4 @@
-package basic100.from1001to1009;
+package io;
 
 public class Problem1006 {
 

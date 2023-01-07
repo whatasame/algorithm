@@ -1,4 +1,4 @@
-package basic100.from1010to1019;
+package io;
 
 import java.io.BufferedReader;
 import java.io.IOException;
