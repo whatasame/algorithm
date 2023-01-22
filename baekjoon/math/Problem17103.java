@@ -3,8 +3,6 @@ package math;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Problem17103 {
 
@@ -32,31 +30,25 @@ public class Problem17103 {
 
     private static int getPartitionCount(int N) {
         // Get prime number list
-        List<Integer> primeNumList =  getPrimeNumList(N);
+        boolean[] isNotPrime = getPrimeNumList(N);
 
         // Find count of partition
         int count = 0;
-        for (int i = 0; i < primeNumList.size(); i++) {
-            for (int j = i; j < primeNumList.size(); j++) {
-                int num1 = primeNumList.get(i);
-                int num2 = primeNumList.get(j);
-
-                if(num1 + num2 == N){
-                    count++;
-                }
+        for (int i = 2; i <= N / 2; i++) {
+            if (!isNotPrime[i] && !isNotPrime[N - i]) {
+                count++;
             }
-
         }
 
         return count;
     }
 
-    private static List<Integer> getPrimeNumList(int N) {
+    private static boolean[] getPrimeNumList(int N) {
         // sieve of Eratosthenes
         boolean[] isNotPrime = new boolean[N + 1]; // default value : false -> isPrime. true -> isNotPrime
         isNotPrime[0] = isNotPrime[1] = true;
         for (int i = 2; i <= Math.sqrt(N); i++) {
-            if(isNotPrime[i] == true){
+            if (isNotPrime[i] == true) {
                 continue;
             }
 
@@ -65,14 +57,6 @@ public class Problem17103 {
             }
         }
 
-        // Generate prime number list of N
-        List<Integer> primeNumList = new ArrayList<>();
-        for (int i = 0; i < isNotPrime.length; i++) {
-            if(isNotPrime[i] == false){
-                primeNumList.add(i);
-            }
-        }
-
-        return primeNumList;
+        return isNotPrime;
     }
 }
