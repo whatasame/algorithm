@@ -10,13 +10,17 @@ public class Problem17103 {
      * https://www.acmicpc.net/problem/17103
      * */
 
-    public static boolean[] isNotPrime = new boolean[1000001];  // default value : false -> isPrime. true -> isNotPrime
+    public static final int MAXIMUM_OF_N = 1000000;
+    public static boolean[] isNotPrime = new boolean[MAXIMUM_OF_N + 1];  // default value : false -> isPrime. true -> isNotPrime
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         // Read input T
         int T = Integer.parseInt(br.readLine());
+
+        // Get prime number list (range: 1 ~ 1000001)
+        sieve();
 
         // Run for N pieces data
         StringBuilder sb = new StringBuilder();
@@ -34,9 +38,6 @@ public class Problem17103 {
     }
 
     private static int getPartitionCount(int N) {
-        // Get prime number list
-        getPrimeNumList(N);
-
         // Find count of partition
         int count = 0;
         for (int i = 2; i <= N / 2; i++) {
@@ -48,18 +49,17 @@ public class Problem17103 {
         return count;
     }
 
-    private static void getPrimeNumList(int N) {
+    private static void sieve() {
         // sieve of Eratosthenes
         isNotPrime[0] = isNotPrime[1] = true;
-        for (int i = 2; i * i <= N; i++) {
+        for (int i = 2; i * i <= MAXIMUM_OF_N; i++) {
             if (isNotPrime[i] == true) {
                 continue;
             }
 
-            for (int j = 2; j <= N / i; j++) {
+            for (int j = 2; j <= MAXIMUM_OF_N / i; j++) {
                 isNotPrime[i * j] = true;
             }
         }
-
     }
 }
