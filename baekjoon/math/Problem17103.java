@@ -10,27 +10,32 @@ public class Problem17103 {
      * https://www.acmicpc.net/problem/17103
      * */
 
+    public static boolean[] isNotPrime = new boolean[1000001];  // default value : false -> isPrime. true -> isNotPrime
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        // Input T and N pieces of data
+        // Read input T
         int T = Integer.parseInt(br.readLine());
-        int[] NList = new int[T];
+
+        // Run for N pieces data
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < T; i++) {
-            NList[i] = Integer.parseInt(br.readLine());
+            int N = Integer.parseInt(br.readLine());
+            int count = getPartitionCount(N);
+
+            sb.append(count).append('\n');
         }
 
-        // Compute count of partition each number
-        for (int N : NList) {
-            System.out.println(getPartitionCount(N));
-        }
+        // Print result
+        System.out.print(sb);
 
         br.close();
     }
 
     private static int getPartitionCount(int N) {
         // Get prime number list
-        boolean[] isNotPrime = getPrimeNumList(N);
+        getPrimeNumList(N);
 
         // Find count of partition
         int count = 0;
@@ -43,11 +48,10 @@ public class Problem17103 {
         return count;
     }
 
-    private static boolean[] getPrimeNumList(int N) {
+    private static void getPrimeNumList(int N) {
         // sieve of Eratosthenes
-        boolean[] isNotPrime = new boolean[N + 1]; // default value : false -> isPrime. true -> isNotPrime
         isNotPrime[0] = isNotPrime[1] = true;
-        for (int i = 2; i <= Math.sqrt(N); i++) {
+        for (int i = 2; i * i <= N; i++) {
             if (isNotPrime[i] == true) {
                 continue;
             }
@@ -57,6 +61,5 @@ public class Problem17103 {
             }
         }
 
-        return isNotPrime;
     }
 }
