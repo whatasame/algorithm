@@ -55,6 +55,9 @@ public class Problem5430 {
         }
 
         /* Generate array string */
+        if(deque.isEmpty()){
+            return "[]";
+        }
         int idxMax = deque.size() - 1;
         StringBuilder sb = new StringBuilder();
         sb.append('[');
@@ -72,12 +75,11 @@ public class Problem5430 {
     }
 
     private static Deque<Integer> getDeque(int n, String readLine) {
-        String content = readLine.substring(1, readLine.length() - 1); // [13,2,73,674] -> 13,2,73,674
-        StringTokenizer st = new StringTokenizer(content, ",");
+        StringTokenizer st = new StringTokenizer(readLine, "[],");
 
         Deque<Integer> deque = new LinkedList<>();
         while (n-- > 0) {
-            deque.add(Integer.valueOf(st.nextToken()));
+            deque.offer(Integer.valueOf(st.nextToken()));
         }
 
         return deque;
