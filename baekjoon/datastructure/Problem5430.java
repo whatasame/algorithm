@@ -22,16 +22,14 @@ public class Problem5430 {
         int T = Integer.parseInt(br.readLine());
 
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < T; i++) {
-            /* Init flag */
-            reverse = false;
+        while (T-- > 0) {
 
             /* Read p, n, arr */
             String p = br.readLine();
             int n = Integer.parseInt(br.readLine());
             deque = getDeque(n, br.readLine());
 
-            /* Compute function p */
+            /* Parse function p */
             String result = parseFunc(p);
             sb.append(result).append('\n');
         }
@@ -42,42 +40,43 @@ public class Problem5430 {
     }
 
     private static String parseFunc(String p) {
-        for (int i = 0; i < p.length(); i++) {
-            char func = p.charAt(i);
+        /* Init flag */
+        reverse = false;
 
+        /* Parse string p */
+        for (char func : p.toCharArray()) {
             if (func == 'R') {
                 reverse = !reverse;
             } else if (func == 'D') {
-                if (pop() == null) {
+                if (poll() == null) {
                     return "error";
                 }
             }
         }
 
-        int size = deque.size();
+        /* Generate array string */
+        int idxMax = deque.size() - 1;
         StringBuilder sb = new StringBuilder();
         sb.append('[');
-        for (int i = 0; i < size; i++) {
-            sb.append(pop());
-            if (i < size - 1) {
-                sb.append(',');
+        for (int i = 0; ; i++) {
+            sb.append(poll());
+            if (i == idxMax) {
+                return sb.append(']').toString();
             }
+            sb.append(',');
         }
-        sb.append(']');
-
-        return sb.toString();
     }
 
-    private static Integer pop() {
+    private static Integer poll() {
         return reverse ? deque.pollLast() : deque.pollFirst();
     }
 
-    private static Deque<Integer> getDeque(int size, String readLine) {
+    private static Deque<Integer> getDeque(int n, String readLine) {
         String content = readLine.substring(1, readLine.length() - 1); // [13,2,73,674] -> 13,2,73,674
         StringTokenizer st = new StringTokenizer(content, ",");
 
         Deque<Integer> deque = new LinkedList<>();
-        for (int i = 0; i < size; i++) {
+        while (n-- > 0) {
             deque.add(Integer.valueOf(st.nextToken()));
         }
 
