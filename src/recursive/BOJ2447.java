@@ -18,7 +18,7 @@ public class BOJ2447 {
         arr = new char[N][N];
 
         /* Run recursive */
-        fillArr(0, 0, N, false);
+        fillWhiteSpace(0, 0, N, false);
 
         /* Print result */
         StringBuilder sb = new StringBuilder();
@@ -33,14 +33,15 @@ public class BOJ2447 {
         br.close();
     }
 
-    private static void fillArr(int row, int col, int length, boolean whiteSpace) {
+    private static void fillWhiteSpace(int row, int col, int length, boolean isCenter) {
         /* End of recursive */
         if (length < 1) {
             arr[row][col] = '*';
             return;
         }
 
-        if (whiteSpace) {
+        /* Fill center with whiteSpace */
+        if (isCenter) {
             for (int i = row; i < row + length; i++) {
                 for (int j = col; j < col + length; j++) {
                     arr[i][j] = ' ';
@@ -49,19 +50,15 @@ public class BOJ2447 {
             return;
         }
 
-        /* Top */
-        fillArr(row, col, length / 3, false);
-        fillArr(row, col + length / 3, length / 3, false);
-        fillArr(row, col + 2 * length / 3, length / 3, false);
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (i == 1 && j == 1) { // center
+                    fillWhiteSpace(row + i * length / 3, col + j * length / 3, length / 3, true);
+                    continue;
+                }
+                fillWhiteSpace(row + i * length / 3, col + j * length / 3, length / 3, false);
+            }
 
-        /* Middle */
-        fillArr(row + length / 3, col, length / 3, false);
-        fillArr(row + length / 3, col + length / 3, length / 3, true);
-        fillArr(row + length / 3, col + 2 * length / 3, length / 3, false);
-
-        /* Bottom */
-        fillArr(row + 2 * length / 3, col, length / 3, false);
-        fillArr(row + 2 * length / 3, col + length / 3, length / 3, false);
-        fillArr(row + 2 * length / 3, col + 2 * length / 3, length / 3, false);
+        }
     }
 }
