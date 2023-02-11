@@ -1,8 +1,6 @@
 package recursive;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class BOJ2447 {
 
@@ -21,15 +19,14 @@ public class BOJ2447 {
         fillWhiteSpace(0, 0, N, false);
 
         /* Print result */
-        StringBuilder sb = new StringBuilder();
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-                sb.append(arr[i][j]);
-            }
-            sb.append('\n');
+            bw.write(arr[i]);
+            bw.write("\n");
         }
-        System.out.println(sb);
+        bw.flush();
 
+        bw.close();
         br.close();
     }
 
