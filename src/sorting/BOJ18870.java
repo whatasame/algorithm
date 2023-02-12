@@ -13,20 +13,21 @@ public class BOJ18870 {
         int N = Integer.parseInt(br.readLine());
         String numStr = br.readLine();
 
-        /* Creat set */
-        Set<Integer> numSet = new TreeSet<>();
+        /* Create List */
         StringTokenizer st = new StringTokenizer(numStr, " ");
+        List<Integer> numList = new ArrayList<>();
         while (N-- > 0) {
-            numSet.add(Integer.parseInt(st.nextToken()));
+            numList.add(Integer.parseInt(st.nextToken()));
         }
-
-        /* Set to List */
-        List<Integer> numList = new ArrayList<>(numSet);
+        numList.sort(Comparator.naturalOrder());
 
         /* Generate Map */
         Map<Integer, Integer> countMap = new HashMap<>();
-        for (int i = 0; i < numList.size(); i++) {
-            countMap.put(numList.get(i), i);
+        int idx = 0;
+        for (int num : numList) {
+            if (countMap.get(num) == null) {
+                countMap.put(num, idx++);
+            }
         }
 
         /* Print result */
