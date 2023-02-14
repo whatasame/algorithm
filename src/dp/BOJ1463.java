@@ -12,33 +12,21 @@ public class BOJ1463 {
         int N = Integer.parseInt(br.readLine());
 
         /* Run algorithm */
-        int count = getCount(N);
+        int[] count = new int[N + 1];
+        count[1] = 0;
+        for (int i = 2; i <= N; i++) {
+            count[i] = count[i - 1] + 1;
+            if (i % 3 == 0) {
+                count[i] = Math.min(count[i / 3] + 1, count[i]);
+            }
+            if (i % 2 == 0) {
+                count[i] = Math.min(count[i / 2] + 1, count[i]);
+            }
+        }
 
         /* Print result */
-        System.out.println(count);
+        System.out.println(count[N]);
 
         br.close();
     }
-
-    private static int getCount(int num) {
-        int count = 0;
-        while (num != 1) {
-            if (num % 3 == 0) {
-                num /= 3;
-            } else if ((num - 1) % 3 == 0) {
-                num--;
-                count++;
-                num /= 3;
-            } else if (num % 2 == 0) {
-                num /= 2;
-            } else if ((num - 1) % 2 == 0) {
-                num--;
-                count++;
-                num /= 2;
-            }
-            count++;
-        }
-        return count;
-    }
-
 }
