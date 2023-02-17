@@ -23,14 +23,17 @@ public class BOJ11053 {
         /* LIS algorithm */
         int[] LIS = new int[size];
         LIS[0] = 1;
-        for (int i = 0; i < size; i++) {
-            int max = 1;
+        for (int i = 1; i < size; i++) {
+            // Compute max of LIS[j]
+            int max = 0;
             for (int j = 0; j < i; j++) {
                 if (sequence[j] < sequence[i]) {
                     max = Math.max(LIS[j], max);
-                    LIS[i] = max + 1;
                 }
             }
+
+            /* Max of LIS[j] + 1 */
+            LIS[i] = max + 1;
         }
 
         /* Print result */
