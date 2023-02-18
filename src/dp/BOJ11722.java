@@ -3,6 +3,7 @@ package dp;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class BOJ11722 {
@@ -20,24 +21,26 @@ public class BOJ11722 {
 
         /* LIS algorithm */
         int[] LIS = new int[N];
-        LIS[0] = 1;
+        int length = 0;
+        LIS[0] = sequence[0];
+        length++;
         for (int i = 1; i < N; i++) {
-            // Compute max of LIS[0, ..., i-1]
-            int max = 0;
-            for (int j = 0; j < i; j++) {
-                if (sequence[j] < sequence[i]) {
-                    max = Math.max(LIS[j], max);
+            if (LIS[length - 1] < sequence[i]) { // Check ascending order
+                LIS[length] = sequence[i];
+                length++;
+            } else {
+                /* Find lowerBound */
+                int lowerBound = Arrays.binarySearch(LIS, 0, length, sequence[i]);
+                if (lowerBound < 0) {
+                    lowerBound = -lowerBound - 1;
                 }
+
+                LIS[lowerBound] = sequence[i];
             }
-            LIS[i] = max + 1;
         }
 
         /* Print result */
-        int result = 0;
-        for (int length : LIS) {
-            result = Math.max(result, length);
-        }
-        System.out.println(result);
+        System.out.println(length);
 
         br.close();
     }
