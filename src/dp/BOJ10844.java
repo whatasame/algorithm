@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 
 public class BOJ10844 {
 
+    private final static int MOD_VALUE = 1000000000;
+
     public static void main(String[] args) throws IOException {
         /* Init data */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -27,7 +29,7 @@ public class BOJ10844 {
                     sum += count[j + 1];
 
                 }
-                tmp[j] = sum % 1000000000;
+                tmp[j] = sum % MOD_VALUE;
             }
             count = tmp;
         }
@@ -35,7 +37,8 @@ public class BOJ10844 {
         /* Print result */
         int result = 0;
         for (int c : count) {
-            result += c % 1000000000;
+            result += c;
+            result %= MOD_VALUE;
         }
         System.out.println(result);
 
