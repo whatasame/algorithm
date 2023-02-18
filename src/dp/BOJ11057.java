@@ -21,13 +21,9 @@ public class BOJ11057 {
 
         /* Compute count of case */
         for (int digit = 2; digit <= N; digit++) {
-            for (int i = 0; i <= 9; i++) {
-                int sum = 0;
-                for (int j = 0; j <= i; j++) {
-                    sum += count[digit - 1][j];
-                    sum %= MOD_VALUE;
-                }
-                count[digit][i] = sum;
+            count[digit][0] = 1; // numbers that start with zero are always one
+            for (int i = 1; i <= 9; i++) {
+                count[digit][i] = (count[digit][i - 1] + count[digit - 1][i]) % MOD_VALUE; // nested DP
             }
         }
 
