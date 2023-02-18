@@ -36,11 +36,13 @@ public class BOJ1932 {
         /* Compute sum */
         sum[0][0] = triangle[0][0];
         for (int i = 1; i < N; i++) {
-            for (int j = 0; j < i; j++) {
+            for (int j = 0; j <= i; j++) {
                 int befMax;
 
-                if (j == 0 || j == i - 1) {
+                if (j == 0) {
                     befMax = sum[i - 1][j];
+                } else if (j == i) {
+                    befMax = sum[i - 1][j - 1];
                 } else {
                     befMax = Math.max(sum[i - 1][j], sum[i - 1][j - 1]);
                 }
