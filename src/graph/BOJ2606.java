@@ -1,29 +1,29 @@
-package dfs;
+package graph;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class BOJ11724 {
+public class BOJ2606 {
 
     private static boolean[][] graph;
+
     private static boolean[] visited;
-    private static int count = 0;
+
+    private static int count = -1;
 
     public static void main(String[] args) throws IOException {
-        /* Read N, M */
+        /* Read input N, E */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-        int N = Integer.parseInt(st.nextToken());
-        int M = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(br.readLine());
+        int E = Integer.parseInt(br.readLine());
 
         /* Init undirected graph */
-        visited = new boolean[N + 1];
         graph = new boolean[N + 1][N + 1];
-        for (int i = 0; i < M; i++) {
+        while (E-- > 0) {
             /* Read edge(u, v) */
-            st = new StringTokenizer(br.readLine(), " ");
+            StringTokenizer st = new StringTokenizer(br.readLine(), " ");
             int u = Integer.parseInt(st.nextToken());
             int v = Integer.parseInt(st.nextToken());
 
@@ -32,26 +32,23 @@ public class BOJ11724 {
             graph[v][u] = true;
         }
 
-        /* Compute count of connected component */
-        for (int i = 1; i <= N; i++) {
-            if (dfs(i)) {
-                count++;
-            }
-        }
+        /* Infect computer connected with no.1 */
+        visited = new boolean[N + 1];
+        dfs(1);
 
         /* Print result */
         System.out.println(count);
 
         br.close();
-
     }
 
-    public static boolean dfs(int vertex) {
+    public static void dfs(int vertex) {
         if (visited[vertex]) {
-            return false;
+            return;
         }
 
         visited[vertex] = true;
+        count++;
 
         for (int i = 1; i < graph[vertex].length; i++) {
             if (graph[vertex][i]) {
@@ -59,7 +56,5 @@ public class BOJ11724 {
             }
         }
 
-        return true;
     }
-
 }
