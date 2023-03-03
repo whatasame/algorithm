@@ -19,16 +19,17 @@ public class BOJ2606 {
         int N = Integer.parseInt(br.readLine());
         int E = Integer.parseInt(br.readLine());
 
-        /* Init directed graph */
+        /* Init undirected graph */
         graph = new boolean[N + 1][N + 1];
         while (E-- > 0) {
-            /* Read edge<u, v> */
+            /* Read edge(u, v) */
             StringTokenizer st = new StringTokenizer(br.readLine(), " ");
             int u = Integer.parseInt(st.nextToken());
             int v = Integer.parseInt(st.nextToken());
 
-            /* Add edge<u, v> */
+            /* Add edge(u, v) */
             graph[u][v] = true;
+            graph[v][u] = true;
         }
 
         /* Infect computer connected with no.1 */
