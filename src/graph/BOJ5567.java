@@ -3,6 +3,8 @@ package graph;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class BOJ5567 {
@@ -25,33 +27,33 @@ public class BOJ5567 {
             graph[u][v] = graph[v][u] = true;
         }
 
-        /* Compute count of invited friend */
-        int count = 0;
+        /* Prepare for BFS */
+        int inviteCount = 0;
         boolean[] invited = new boolean[N + 1];
-        for (int i = 2; i <= N; i++) {
-            if (graph[1][i]) { // 1 and i is friend
-                if (!invited[i]) { // invite i
+        Queue<Integer> queue = new LinkedList<>();
+        for (int i = 2; i <= N; i++) { // invite friend
+            if (graph[1][i]) {
+                invited[i] = true;
+                inviteCount++;
+                queue.offer(i);
+            }
+        }
+
+        /* Count friend of friend */
+        while (!queue.isEmpty()) {
+            int friend = queue.poll();
+            for (int i = 2; i <= N; i++) {
+                if (graph[friend][i] && !invited[i]) {
                     invited[i] = true;
-                    count++;
+                    inviteCount++;
                 }
-
-                for (int j = 2; j <= N; j++) {
-                    if (graph[i][j]) { // j is i's friend
-                        if (!invited[j]) { // invite j
-                            invited[j] = true;
-                            count++;
-                        }
-                    }
-                }
-
             }
         }
 
         /* Print result */
-        System.out.println(count);
+        System.out.println(inviteCount);
 
         br.close();
     }
-
 
 }
