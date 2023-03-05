@@ -13,13 +13,10 @@ public class BOJ2589 {
     private static int M;
 
     private static char[][] graph;
-    private static boolean[][] visited;
-    private static int[][] bfsLength;
 
     private static final int[] offsetX = {0, 0, 1, -1};
     private static final int[] offsetY = {-1, 1, 0, 0};
 
-    private static int maxLength = 0;
 
     public static void main(String[] args) throws IOException {
         /* Read input N, M */
@@ -35,12 +32,14 @@ public class BOJ2589 {
         }
 
         /* Compute maxLength */
+        int maxLength = 0;
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < M; j++) {
-                /* Run BFS for all vertex */
-                visited = new boolean[N][M];
-                bfsLength = new int[N][M];
-                bfs(new Vertex(i, j));
+                /* Run BFS for all 'L' vertex */
+                if (graph[i][j] == 'L') {
+                    int length = bfs(new Vertex(i, j, 0));
+                    maxLength = Math.max(maxLength, length);
+                }
             }
         }
 
@@ -50,34 +49,39 @@ public class BOJ2589 {
         br.close();
     }
 
-    public static void bfs(Vertex vertex) {
+    public static int bfs(Vertex vertex) {
+        /* BFS data */
+        boolean[][] visited = new boolean[N][M];
+
         /* BFS queue */
         Queue<Vertex> queue = new LinkedList<>();
         queue.offer(vertex);
+        visited[vertex.x][vertex.y] = true;
 
         /* BFS */
+        int bfsLength = 0;
         while (!queue.isEmpty()) {
             /* Dequeue vertex */
             vertex = queue.poll();
-            int x = vertex.x;
-            int y = vertex.y;
-            visited[x][y] = true;
 
             /* Search neighbor land */
             for (int i = 0; i < offsetX.length; i++) {
-                int newX = x + offsetX[i];
-                int newY = y + offsetY[i];
+                int newX = vertex.x + offsetX[i];
+                int newY = vertex.y + offsetY[i];
+                int newLength = vertex.length + 1;
 
                 if (isValid(newX, newY) && !visited[newX][newY] && graph[newX][newY] == 'L') {
                     /* Enqueue neighbor land */
-                    queue.offer(new Vertex(newX, newY));
+                    queue.offer(new Vertex(newX, newY, newLength));
+                    visited[newX][newY] = true;
 
-                    /* Length and result update */
-                    bfsLength[newX][newY] = bfsLength[x][y] + 1;
-                    maxLength = Math.max(maxLength, bfsLength[newX][newY]);
+                    /* Update return length */
+                    bfsLength = Math.max(bfsLength, newLength);
                 }
             }
         }
+
+        return bfsLength;
     }
 
     public static boolean isValid(int x, int y) {
@@ -89,9 +93,12 @@ public class BOJ2589 {
         int x;
         int y;
 
-        public Vertex(int x, int y) {
+        int length;
+
+        public Vertex(int x, int y, int length) {
             this.x = x;
             this.y = y;
+            this.length = length;
         }
     }
 }
