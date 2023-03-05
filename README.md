@@ -1,21 +1,38 @@
-## Problem Solving
-Problem Solving is an archive of source code solving Problem.
+# Problem Solving
 
-## Naming rules
-Each directory name represents sites where code from.
+알고리즘 사이트에서 제공하는 문제를 직접 푼 후, 소스 코드를 업로드하였습니다.
 
-* [Baekjoon](https://www.acmicpc.net/)
+## 문제 풀이 정보
+
+### 알고리즘 사이트 목록
+
+* [Baekjoon Online Judge](https://www.acmicpc.net/)
 * [CodeUp](https://codeup.kr/index.php)
 
-And also lower directory represents category of problem.
+### 사용 언어
 
-* io : Input/Output problem
-* math : Basic Math problem
+Java (JDK 8)
 
-Class name means number of Problem in individual site.
+## 이름 규칙
 
-* Problem1004 : 1004th Problem in such site.
+패키지와 파일명은 다음 규칙을 따릅니다.
 
-## Trouble Shooting
+* 패키지: 문제 유형
+* 파일명: 사이트 이름과 문제 번호
 
-Check [this notion page](https://www.notion.so/f35009b2ea7347bd8511ab96e8ed7620?v=b87671566eac48838989ef65cc2c004a) for how to I solved, how to I improved and what I learned.
+예를 들어, BOJ1004는 [Baekjoon Online Judge의 1004번 문제](https://www.acmicpc.net/problem/1004)를 뜻합니다.
+
+## 커밋 규칙
+
+커밋 메시지는 태그와 메시지로 구성됩니다.
+
+사용하는 태그는 다음과 같습니다.
+
+| 태그                  | 뜻               |
+|---------------------|-----------------|
+| Accepted            | 맞았습니다           |
+| Wrong Answer        | 틀렸습니다           |
+| Runtime Error       | 런타임 에러          |
+| Time Limit Exceeded | 시간 초과           |
+| Unsolved            | 스스로 풀지 못한 경우    |
+| Style               | 문제 풀이와 관련 없는 커밋 |
