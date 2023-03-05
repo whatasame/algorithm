@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
-public class BOJ2172 {
+public class BOJ2178 {
 
     private static int N;
     private static int M;
@@ -80,14 +80,14 @@ public class BOJ2172 {
         return (x >= 0 && x < N && y >= 0 && y < M);
     }
 
-}
+    static class Vertex {
+        int x;
+        int y;
 
-class Vertex {
-    int x;
-    int y;
-
-    public Vertex(int x, int y) {
-        this.x = x;
-        this.y = y;
+        public Vertex(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
     }
 }
+
