@@ -34,8 +34,7 @@ public class BOJ2960 {
             }
 
             /* Delete number */
-            for (int j = 1; i * j <= N; j++) {
-                int targetNum = i * j;
+            for (int targetNum = i; targetNum <= N; targetNum += i) {
                 if (!isDeleted[targetNum]) {
                     isDeleted[targetNum] = true;
                     deleteCount++;
