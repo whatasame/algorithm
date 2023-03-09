@@ -35,4 +35,7 @@ Java (JDK 8)
 | Runtime Error       | 런타임 에러          |
 | Time Limit Exceeded | 시간 초과           |
 | Unsolved            | 스스로 풀지 못한 경우    |
-| Style               | 문제 풀이와 관련 없는 커밋 |
+| Improve             | 성능이 더 좋은 코드로 개선 |
+| Unsolved            | 스스로 풀지 못한 경우    |
+| Style               | 코드 텍스트 수정       |
+| Chore               | 문제 풀이와 관련 없는 수정 |
