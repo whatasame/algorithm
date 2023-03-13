@@ -35,9 +35,12 @@ public class BOJ15685 {
         int count = 0;
         for (int i = 0; i < ARRAY_LENGTH; i++) {
             for (int j = 0; j < ARRAY_LENGTH; j++) {
-                if (arr[i][j] && arr[i + 1][j] && arr[i][j + 1] && arr[i + 1][j + 1]) {
+                if (arr[i][j]
+                        && isValidIndex(i + 1, j + 1) // Check valid index
+                        && arr[i + 1][j] && arr[i][j + 1] && arr[i + 1][j + 1]) { // Check rectangle
                     count++;
                 }
+
             }
         }
 
@@ -86,7 +89,13 @@ public class BOJ15685 {
                     y++;
                     break;
             }
-            arr[y][x] = true; // draw
+            if (isValidIndex(y, x)) {
+                arr[y][x] = true; // draw
+            }
         }
+    }
+
+    public static boolean isValidIndex(int i, int j) {
+        return i < ARRAY_LENGTH && j < ARRAY_LENGTH;
     }
 }
