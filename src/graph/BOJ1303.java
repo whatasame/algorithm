@@ -3,8 +3,6 @@ package graph;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.StringTokenizer;
 
 public class BOJ1303 {
@@ -17,9 +15,6 @@ public class BOJ1303 {
 
     private static final int[] offsetX = {0, 0, 1, -1};
     private static final int[] offsetY = {1, -1, 0, 0};
-
-    private static final Map<Character, Integer> power = new HashMap<>();
-    private static int count = 0;
 
     public static void main(String[] args) throws IOException {
         /* Read input N, M */
@@ -35,38 +30,48 @@ public class BOJ1303 {
         }
 
         /* DFS about All vertex */
+        int whitePower = 0;
+        int bluePower = 0;
         visited = new boolean[M][N];
         for (int i = 0; i < M; i++) {
             for (int j = 0; j < N; j++) {
                 if (!visited[i][j]) {
                     char color = ground[i][j];
-                    dfs(i, j, color);
-                    power.put(color, power.getOrDefault(color, 0) + (int) Math.pow(count, 2));
-                    count = 0;
+                    int soldier = dfs(i, j, color);
+                    int power = (int) Math.pow(soldier, 2);
+
+                    if (color == 'W') {
+                        whitePower += power;
+                    } else {
+                        bluePower += power;
+                    }
                 }
             }
         }
 
         /* Print result */
-        System.out.println(power.getOrDefault('W', 0) + " " + power.getOrDefault('B', 0));
-
+        System.out.println(whitePower + " " + bluePower);
 
         br.close();
     }
 
-    private static void dfs(int x, int y, char color) {
+    private static int dfs(int x, int y, char color) {
+        int soldier = 0;
+
         visited[x][y] = true;
-        count++;
+        soldier++;
 
         for (int i = 0; i < offsetX.length; i++) {
             int newX = x + offsetX[i];
             int newY = y + offsetY[i];
 
             if (isValid(newX, newY) && !visited[newX][newY] && ground[newX][newY] == color) {
-                dfs(newX, newY, color);
+                soldier += dfs(newX, newY, color);
             }
 
         }
+
+        return soldier;
     }
 
     private static boolean isValid(int x, int y) {
