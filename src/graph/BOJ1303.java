@@ -9,6 +9,9 @@ import java.util.StringTokenizer;
 
 public class BOJ1303 {
 
+    private static int N;
+    private static int M;
+
     private static char[][] ground;
     private static boolean[][] visited;
 
@@ -22,19 +25,19 @@ public class BOJ1303 {
         /* Read input N, M */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-        final int N = Integer.parseInt(st.nextToken());
-        final int M = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken());
+        M = Integer.parseInt(st.nextToken());
 
         /* Init ground */
-        ground = new char[N][M];
-        for (int i = 0; i < N; i++) {
+        ground = new char[M][N];
+        for (int i = 0; i < M; i++) {
             ground[i] = br.readLine().toCharArray();
         }
 
         /* DFS about All vertex */
-        visited = new boolean[N][M];
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < M; j++) {
+        visited = new boolean[M][N];
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++) {
                 if (!visited[i][j]) {
                     char color = ground[i][j];
                     dfs(i, j, color);
@@ -67,7 +70,7 @@ public class BOJ1303 {
     }
 
     private static boolean isValid(int x, int y) {
-        return x >= 0 && x < ground[0].length && y >= 0 && y < ground.length;
+        return x >= 0 && x < M && y >= 0 && y < N;
     }
 
 }
