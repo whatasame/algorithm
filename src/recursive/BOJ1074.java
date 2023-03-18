@@ -53,9 +53,19 @@ public class BOJ1074 {
             return;
         }
 
-        visit(row, col, length / 2);
-        visit(row, col + length / 2, length / 2);
-        visit(row + length / 2, col, length / 2);
-        visit(row + length / 2, col + length / 2, length / 2);
+
+        length /= 2;
+        if (row + length <= r && col + length <= c) {
+            count += (int) Math.pow(length, 2) * 3;
+            visit(row + length, col + length, length);
+        } else if (row + length <= r && col <= c) {
+            count += (int) Math.pow(length, 2) * 2;
+            visit(row + length, col, length);
+        } else if (row <= r && col + length <= c) {
+            count += (int) Math.pow(length, 2);
+            visit(row, col + length, length);
+        } else {
+            visit(row, col, length);
+        }
     }
 }
