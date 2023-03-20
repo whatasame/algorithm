@@ -7,10 +7,10 @@ import java.util.*;
 
 public class BOJ1304 {
 
+    private static int N;
     private static List<List<Integer>> graph;
 
-    private static boolean[] visited;
-    private static boolean[] finished;
+    private static boolean[] visited, finished;
 
     private static final List<Cycle> cycleList = new LinkedList<>();
 
@@ -18,26 +18,21 @@ public class BOJ1304 {
         /* Read input N, M */
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
-        final int N = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken());
         final int M = Integer.parseInt(st.nextToken());
 
         /* Init directed graph */
         graph = new LinkedList<>();
-        for (int i = 0; i <= N; i++) {
+        for (int i = 0; i <= N; i++) { // Init vertex
             graph.add(new ArrayList<>());
         }
-
-        /* Add expressway */
-        for (int i = 1; i < N; i++) {
+        for (int i = 1; i < N; i++) { //  Add expressway
             graph.get(i).add(i + 1);
         }
-
-        /* Add general road */
-        for (int i = 0; i < M; i++) {
+        for (int i = 0; i < M; i++) { //  Add general road
             st = new StringTokenizer(br.readLine(), " ");
             int from = Integer.parseInt(st.nextToken());
             int to = Integer.parseInt(st.nextToken());
-
             graph.get(from).add(to);
         }
 
@@ -53,36 +48,40 @@ public class BOJ1304 {
             checkCycle(i); // dfs
         }
 
-        /* Compute min offset of area*/
-        int offset;
-        a:
-        for (offset = 0; offset <= N; offset++) {
-            int start;
-            int end = 0;
+        /* Compute min area size */
+        int size = getMinAreaSize();
 
-            while (true) {
-                if (end >= N) {
-                    break a;
+        /* Print result */
+        System.out.println(N / size);
+
+        br.close();
+    }
+
+    private static int getMinAreaSize() {
+        for (int offset = 0; offset <= N; offset++) {
+            /* Area: start ~ end */
+            int start, end = 0;
+
+            while (end <= N) { // Area is out of range
+                if (end == N) { // Find min size
+                    return offset + 1;
                 }
+
+                /* Compute area */
                 start = end + 1;
                 end = start + offset;
 
-                if (!isValidArea(end)) {
+                /* Check cycle's arrival point exists in area */
+                if (!hasCycleArrivalPoint(end)) {
                     break;
                 }
             }
         }
 
-
-
-        /* Print result */
-        int length = offset + 1;
-        System.out.println(N / length);
-
-        br.close();
+        return 0; // unreachable statement
     }
 
-    private static boolean isValidArea(int end) {
+    private static boolean hasCycleArrivalPoint(int end) {
         for (Cycle cycle : cycleList) {
             if (end < cycle.from && end >= cycle.to) {
                 return false;
@@ -97,7 +96,7 @@ public class BOJ1304 {
         for (int neighbor : graph.get(v)) {
             if (!visited[neighbor]) {
                 checkCycle(neighbor);
-            } else if (!finished[neighbor]) {
+            } else if (!finished[neighbor]) { // Cycle exists
                 cycleList.add(new Cycle(v, neighbor));
             }
         }
