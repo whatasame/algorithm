@@ -28,12 +28,11 @@ Java (JDK 8)
 
 사용하는 태그는 다음과 같습니다.
 
-| 태그       | 뜻                    |
-|----------|----------------------|
-| accepted | Accepted                |
-| wrong    | Wrong Answer, Time Limit Exceeded, Memory Limit Exceed |
-| error    | Runtime Error,  Wrong Answer       |
-| unsolved | 스스로 풀지 못한 경우         |
-| improve  | 성능이 더 좋은 코드로 개선      |
-| style    | 코드 텍스트 단순 수정         |
-| chore    | 문제 풀이와 관련 없는 수정      |
+| 태그       | 뜻                                                                     |
+|----------|-----------------------------------------------------------------------|
+| accepted | Accepted                                                              |
+| wrong    | Wrong Answer, Runtime Error, Time Limit Exceeded, Memory Limit Exceed |
+| unsolved | 스스로 풀지 못한 경우                                                          |
+| improve  | 성능이 더 좋은 코드로 개선                                                       |
+| style    | 코드 텍스트 단순 수정                                                          |
+| chore    | 문제 풀이와 관련 없는 수정                                                       |
