@@ -4,10 +4,7 @@
       "description": "Accepted"
     },
     "wrong": {
-      "description": "Wrong Answer, Time Limit Exceeded, Memory Limit Exceed"
-    },
-    "error": {
-      "description": "Runtime Error, Wrong Answer"
+      "description": "Wrong Answer, Runtime error, Time Limit Exceeded, Memory Limit Exceed"
     },
     "unsolved": {
       "description": "스스로 풀지 못한 경우"
