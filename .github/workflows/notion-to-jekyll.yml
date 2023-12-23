@@ -1,0 +1,19 @@
+name: Notion to Jekyll
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Run every midnight
+  workflow_dispatch:
+
+jobs:
+  notion-to-jekyll:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Notion to Jekyll synchronization
+        uses: whatasame/notion-to-jekyll@v0.1.0-beta # latest version
+        with:
+          notion_api_key: ${{ secrets.NOTION_API_KEY }}
+          notion_database_id: ${{ secrets.NOTION_DATABASE_ID }}
