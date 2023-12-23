@@ -1,38 +1,27 @@
-# Problem Solving
+# whiteglass-template
 
-알고리즘 사이트에서 제공하는 문제를 직접 푼 후, 소스 코드를 업로드하였습니다.
+[![Jekyll Deploy](https://github.com/yous/whiteglass-template/workflows/Jekyll%20Deploy/badge.svg?branch=source)](https://github.com/yous/whiteglass-template/actions?query=workflow%3A%22Jekyll+Deploy%22+branch%3Asource)
 
-## 문제 풀이 정보
+Template site for [whiteglass](https://github.com/yous/whiteglass) theme. Click
+"Use this template" button to start.
 
-### 알고리즘 사이트 목록
+## Configuration
 
-* [Baekjoon Online Judge](https://www.acmicpc.net/)
-* [CodeUp](https://codeup.kr/index.php)
+Change the options defined in _config.yml. Let's say the URL of your source
+repository is `https://github.com/johndoe/some-repo`.
 
-### 사용 언어
+``` yaml
+title: My site title
+author: John Doe
+description: This is my site description.
+baseurl: "/some-repo"
+url: "https://johndoe.github.io"
+```
 
-Java (JDK 8)
+For further details, see [Configuration](https://jekyllrb.com/docs/configuration/)
+section under Jekyll documentation.
 
-## 이름 규칙
+## License
 
-패키지와 파일명은 다음 규칙을 따릅니다.
-
-* 패키지: 문제 유형
-* 파일명: 사이트 이름과 문제 번호
-
-예를 들어, BOJ1004는 [Baekjoon Online Judge의 1004번 문제](https://www.acmicpc.net/problem/1004)를 뜻합니다.
-
-## 커밋 규칙
-
-커밋 메시지는 태그와 메시지로 구성됩니다.
-
-사용하는 태그는 다음과 같습니다.
-
-| 태그       | 뜻                                                                     |
-|----------|-----------------------------------------------------------------------|
-| accepted | Accepted                                                              |
-| wrong    | Wrong Answer, Runtime Error, Time Limit Exceeded, Memory Limit Exceed |
-| unsolved | 스스로 풀지 못한 경우                                                          |
-| improve  | 성능이 더 좋은 코드로 개선                                                       |
-| style    | 코드 텍스트 단순 수정                                                          |
-| chore    | 문제 풀이와 관련 없는 수정                                                       |
+whiteglass-template is free and unencumbered software released into the public
+domain. For more information, please refer to <http://unlicense.org/>.
